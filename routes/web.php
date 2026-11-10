@@ -1,6 +1,6 @@
 <?php
 
-use App\Modules\Post\Home\Infrastructure\Components\Pages\DashboardPage;
+use App\Modules\Shared\Pages\FeedPage;
 use Illuminate\Support\Facades\Route;
 
-Route::livewire('/', DashboardPage::class);
+Route::livewire('/', FeedPage::class);

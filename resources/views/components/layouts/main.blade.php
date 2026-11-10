@@ -1,28 +1,31 @@
-<div class="min-w-full flex justify-center gap-2">
-    <!-- Sidebar -->
-    <div class="flex flex-col bg-white min-h-screen md:w-md md:max-w-md">
-        <a wire:navigate href="#" class="py-8">
-            <h1 class="md:text-2xl font-bold text-center my-auto">DuckSnap.</h1>
-        </a>
-        <div class="px-4">
-            <ul>
-                <li class="text-xl">
-                    <a href="">Beranda</a>
+<div class="flex flex-col justify-between h-screen gap-2">
+    <div class="bg-mist-50 border-b border-mist-200 w-full sticky top-0 z-50">
+        <div class="flex items-center justify-between md:max-w-4xl mx-auto px-4">
+            <a href="/">
+                <h1 class="text-2xl font-bold">DuckSnap.</h1>
+            </a>
+            <ul class="inline-flex items-center justify-start gap-4">
+                <li>
+                    <a href="" class="flex items-center justify-center md:w-9 h-full py-3">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640">
+                            <!--!Font Awesome Free v7.3.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2026 Fonticons, Inc.-->
+                            <path d="M304 70.1C313.1 61.9 326.9 61.9 336 70.1L568 278.1C577.9 286.9 578.7 302.1 569.8 312C560.9 321.9 545.8 322.7 535.9 313.8L527.9 306.6L527.9 511.9C527.9 547.2 499.2 575.9 463.9 575.9L175.9 575.9C140.6 575.9 111.9 547.2 111.9 511.9L111.9 306.6L103.9 313.8C94 322.6 78.9 321.8 70 312C61.1 302.2 62 287 71.8 278.1L304 70.1zM320 120.2L160 263.7L160 512C160 520.8 167.2 528 176 528L224 528L224 424C224 384.2 256.2 352 296 352L344 352C383.8 352 416 384.2 416 424L416 528L464 528C472.8 528 480 520.8 480 512L480 263.7L320 120.3zM272 528L368 528L368 424C368 410.7 357.3 400 344 400L296 400C282.7 400 272 410.7 272 424L272 528z"/>
+                        </svg>
+                    </a>
                 </li>
             </ul>
         </div>
     </div>
-    <!-- End Sidebar -->
-
-    <!-- Main -->
-    <main class="w-full">
-        {{ $slot }}
-    </main>
-    <!-- End Main -->
-
-    <!-- Second Sidebar -->
-    <div class="bg-white min-h-screen md:w-md md:max-w-md">
-
+    <div class="flex-1">
+        <div class="flex flex-col md:max-w-4xl mx-auto">
+            {{ $slot }}
+        </div>
     </div>
-    <!-- End Second Sidebar -->
+    <footer class="w-full bg-mist-600 py-2 text-mist-100">
+        <div class="md:max-w-4xl mx-auto text-center">
+            <span class="font-semibold">
+                Copyright &copy; Ahmad Zidan 2026
+            </span>
+        </div>
+    </footer>
 </div>
