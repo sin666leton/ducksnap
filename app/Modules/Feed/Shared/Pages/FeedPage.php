@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Modules\Shared\Pages;
+namespace App\Modules\Feed\Shared\Pages;
 
 use Livewire\Component;
 
