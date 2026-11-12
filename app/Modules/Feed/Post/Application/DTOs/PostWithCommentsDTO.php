@@ -14,6 +14,8 @@ class PostWithCommentsDTO
         public readonly string $postContent,
         public readonly string|null $postImage,
         public readonly string $postCreated,
+        public readonly int $totalLikes,
+        public readonly int $totalComments,
         /**
          * @var CommentDTO[]
          */

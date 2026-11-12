@@ -9,44 +9,76 @@
     <!-- KONTEN -->
     <div class="flex-1 flex flex-col gap-2 min-w-0">
         <div class="flex flex-col rounded-md bg-mist-50 border border-mist-300 gap-2">
-            <div class="inline-flex items-center justify-between px-4 pt-4 bg-mist-50 border-mist-300">
-                <a wire:navigate href="/pengguna/{{ $authorId }}" class="font-semibold text-">{{ $authorName }}</a>
+            <div class="inline-flex items-center justify-between px-4 pt-4 bg-mist-50 border-mist-300 gap-2">
+                <span class="font-semibold flex-1">{{ $authorName }}</span>
                 <span class="text-mist-500">{{ $postCreated }}</span>
+                @if (auth()->user()->id == intval($authorId))
+                    <button type="button" wire:click="toggleDropdown" class="cursor-pointer">
+                        <svg class="w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640">
+                            <path d="M320 208C289.1 208 264 182.9 264 152C264 121.1 289.1 96 320 96C350.9 96 376 121.1 376 152C376 182.9 350.9 208 320 208zM320 432C350.9 432 376 457.1 376 488C376 518.9 350.9 544 320 544C289.1 544 264 518.9 264 488C264 457.1 289.1 432 320 432zM376 320C376 350.9 350.9 376 320 376C289.1 376 264 350.9 264 320C264 289.1 289.1 264 320 264C350.9 264 376 289.1 376 320z"/>
+                        </svg>
+                    </button>
+                @endif
+                @if (auth()->user()->id == $authorId && $showDropdown)
+                    <div class="flex items-center absolute right-0">
+                        <div
+                            class="bg-mist-50 border border-mist-200 min-w-52 max-w-52 absolute top-full mt-2.5 right-0 overflow-hidden rounded-md">
+                            <ul class="*:h-full *:flex *:items-center *:text-sm">
+                                <li>
+                                    <button type="button" wire:click="toggleEdit"
+                                        class="cursor-pointer flex items-center gap-1.5 justify-start py-1.5  px-3 w-full hover:bg-mist-200 m-0.5 rounded-md duration-75">
+                                        <svg class="w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640">
+                                            <path d="M416.9 85.2L372 130.1L509.9 268L554.8 223.1C568.4 209.6 576 191.2 576 172C576 152.8 568.4 134.4 554.8 120.9L519.1 85.2C505.6 71.6 487.2 64 468 64C448.8 64 430.4 71.6 416.9 85.2zM338.1 164L122.9 379.1C112.2 389.8 104.4 403.2 100.3 417.8L64.9 545.6C62.6 553.9 64.9 562.9 71.1 569C77.3 575.1 86.2 577.5 94.5 575.2L222.3 539.7C236.9 535.6 250.2 527.9 261 517.1L476 301.9L338.1 164z"/>
+                                        </svg>
+                                        <span>
+                                            Edit postingan
+                                        </span>
+                                    </button>
+                                </li>
+                                <li class="border-t border-mist-200">
+                                    <button
+                                        class="flex items-center justify-start gap-1 py-1.5 px-3 w-full cursor-pointer text-red-400 text-sm font-semibold text-left hover:bg-red-400 hover:text-mist-50 rounded-md m-1 duration-75"
+                                        wire:click="delete">
+                                        <svg class="w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640">
+                                            <path fill="currentColor" d="M232.7 69.9C237.1 56.8 249.3 48 263.1 48L377 48C390.8 48 403 56.8 407.4 69.9L416 96L512 96C529.7 96 544 110.3 544 128C544 145.7 529.7 160 512 160L128 160C110.3 160 96 145.7 96 128C96 110.3 110.3 96 128 96L224 96L232.7 69.9zM128 208L512 208L512 512C512 547.3 483.3 576 448 576L192 576C156.7 576 128 547.3 128 512L128 208zM216 272C202.7 272 192 282.7 192 296L192 488C192 501.3 202.7 512 216 512C229.3 512 240 501.3 240 488L240 296C240 282.7 229.3 272 216 272zM320 272C306.7 272 296 282.7 296 296L296 488C296 501.3 306.7 512 320 512C333.3 512 344 501.3 344 488L344 296C344 282.7 333.3 272 320 272zM424 272C410.7 272 400 282.7 400 296L400 488C400 501.3 410.7 512 424 512C437.3 512 448 501.3 448 488L448 296C448 282.7 437.3 272 424 272z"/>
+                                        </svg>
+                                        <span>Hapus Postingan</span>
+                                    </button>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                @endif
             </div>
             <div class="p-4">
-                <a wire:navigate href={{ route('post.show', ['id' => intval($postId)]) }}>{{ $postContent }}</a>
-                @if ($postImage)
-                    <div class="aspect-video mt-4">
-                        <img src={{ asset('storage/' . $postImage) }} alt=""
-                            class="rounded-md w-full h-full object-center object-cover">
-                    </div>
-                    @error('image')
-                        <p class="text-red-400 font-semibold px-4 text-sm">{{ $message }}</p>
-                    @enderror
+                @if ($editMode)
+                    <form action="" method="POST" wire:submit="updatePost">
+                        <textarea name="" id="" class="w-full min-h-auto" wire:model="editedContent" autofocus>{{ $postContent }}</textarea>
+                        @if ($postImage)
+                            <div class="aspect-video mt-4">
+                                <img src={{ asset('storage/' . $postImage) }} alt=""
+                                    class="rounded-md w-full h-full object-center object-cover">
+                            </div>
+                        @endif
+                        <div class="inline-flex items-center justify-end mt-4 gap-2 w-full">
+                            <button wire:click="toggleEdit" type="button" class="border border-mist-600 text-sm font-semibold rounded-md px-4 py-2 cursor-pointer hover:bg-mist-600 hover:text-mist-50 duration-75">Batal</button>
+                            <button type="submit" class="border border-mist-600 font-semibold text-mist-50 text-sm bg-slate-600 py-2 px-4 rounded-md cursor-pointer hover:bg-slate-700 duration-75">Simpan perubahan</button>
+                        </div>
+                    </form>
+                @else
+                    <a wire:navigate href={{ route('post.show', ['id' => intval($postId)]) }} class="w-full">{{ $postContent }}</a>
+                    @if ($postImage)
+                        <div class="aspect-video mt-4">
+                            <img src={{ asset('storage/' . $postImage) }} alt=""
+                                class="rounded-md w-full h-full object-center object-cover">
+                        </div>
+                    @endif
                 @endif
                 <!-- <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia est, aut nisi obcaecati quasi veniam vel qui placeat magnam nesciunt soluta repellat! Explicabo in maiores consectetur eos, debitis aliquam laudantium!</p> -->
             </div>
             <div class="inline-flex gap-4 border-t border-mist-300 p-4">
-                <form action="" method="post" class="inline-flex items-center">
-                    <button class="inline-flex items-center justify-center gap-1">
-                        <!-- <svg class="w-8" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640">
-                            <path d="M442.9 144C415.6 144 389.9 157.1 373.9 179.2L339.5 226.8C335 233 327.8 236.7 320.1 236.7C312.4 236.7 305.2 233 300.7 226.8L266.3 179.2C250.3 157.1 224.6 144 197.3 144C150.3 144 112.2 182.1 112.2 229.1C112.2 279 144.2 327.5 180.3 371.4C221.4 421.4 271.7 465.4 306.2 491.7C309.4 494.1 314.1 495.9 320.2 495.9C326.3 495.9 331 494.1 334.2 491.7C368.7 465.4 419 421.3 460.1 371.4C496.3 327.5 528.2 279 528.2 229.1C528.2 182.1 490.1 144 443.1 144zM335 151.1C360 116.5 400.2 96 442.9 96C516.4 96 576 155.6 576 229.1C576 297.7 533.1 358 496.9 401.9C452.8 455.5 399.6 502 363.1 529.8C350.8 539.2 335.6 543.9 320 543.9C304.4 543.9 289.2 539.2 276.9 529.8C240.4 502 187.2 455.5 143.1 402C106.9 358.1 64 297.7 64 229.1C64 155.6 123.6 96 197.1 96C239.8 96 280 116.5 305 151.1L320 171.8L335 151.1z"/>
-                        </svg> -->
-                        <svg class="w-8" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640">
-                            <path fill="rgb(255, 98, 98)"
-                                d="M305 151.1L320 171.8L335 151.1C360 116.5 400.2 96 442.9 96C516.4 96 576 155.6 576 229.1L576 231.7C576 343.9 436.1 474.2 363.1 529.9C350.7 539.3 335.5 544 320 544C304.5 544 289.2 539.4 276.9 529.9C203.9 474.2 64 343.9 64 231.7L64 229.1C64 155.6 123.6 96 197.1 96C239.8 96 280 116.5 305 151.1z" />
-                        </svg>
-                        <span>100</span>
-                    </button>
-                </form>
-                <div class="inline-flex items-center justify-center gap-1">
-                    <svg class="w-8" xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 640 640"><!--!Font Awesome Free v7.3.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2026 Fonticons, Inc.-->
-                        <path
-                            d="M115.9 448.9C83.3 408.6 64 358.4 64 304C64 171.5 178.6 64 320 64C461.4 64 576 171.5 576 304C576 436.5 461.4 544 320 544C283.5 544 248.8 536.8 217.4 524L101 573.9C97.3 575.5 93.5 576 89.5 576C75.4 576 64 564.6 64 550.5C64 546.2 65.1 542 67.1 538.3L115.9 448.9zM153.2 418.7C165.4 433.8 167.3 454.8 158 471.9L140 505L198.5 479.9C210.3 474.8 223.7 474.7 235.6 479.6C261.3 490.1 289.8 496 319.9 496C437.7 496 527.9 407.2 527.9 304C527.9 200.8 437.8 112 320 112C202.2 112 112 200.8 112 304C112 346.8 127.1 386.4 153.2 418.7z" />
-                    </svg>
-                    <span>100</span>
-                </div>
+                <livewire:post-like :postId="$postId"/>
+                <livewire:post-comment :postId="$postId"/>
             </div>
         </div>
         <!-- Komentar -->

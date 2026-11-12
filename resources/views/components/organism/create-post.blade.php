@@ -1,7 +1,7 @@
 <div class="flex gap-4">
     <div class="pt-4">
         <div class="aspect-square relative overflow-hidden h-12 rounded-full">
-            <img src={{ asset($user->avatar) }} alt="" class="object-cover w-full object-center">
+            <img src={{ asset($user->avatar) }} alt="" class="object-cover w-full h-full object-center">
         </div>
     </div>
     <form method="POST" wire:submit="submit"

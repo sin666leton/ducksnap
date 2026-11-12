@@ -9,11 +9,6 @@ use Livewire\Component;
 
 class FeedPage extends Component
 {
-    /**
-     * @var PostWithCommentsDTO[]
-     */
-    protected array $posts;
-
     protected GetPostWithCommentUsecase $usecase;
 
     public function boot(GetPostWithCommentUsecase $usecase)
@@ -22,6 +17,7 @@ class FeedPage extends Component
     }
 
     #[On('post-created')]
+    #[On('post-deleted')]
     public function refreshPost()
     {
     }

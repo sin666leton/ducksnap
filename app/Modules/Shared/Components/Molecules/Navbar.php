@@ -3,12 +3,25 @@
 namespace App\Modules\Shared\Components\Molecules;
 
 use App\Modules\User\Shared\Services\LogoutService;
-use Illuminate\Support\Facades\Auth;
+use Livewire\Attributes\On;
 use Livewire\Component;
 
 class Navbar extends Component
 {
     public $showDropdown = 0;
+
+    public $user;
+
+    public function mount()
+    {
+        $this->user = auth()->user();
+    }
+
+    #[On('user-updated')]
+    public function refreshNavbar()
+    {
+
+    }
 
     public function toggleDropdown()
     {
@@ -24,11 +37,9 @@ class Navbar extends Component
 
     public function render()
     {
-        $user = Auth::user();
-
         return view('components.molecules.navbar', [
             'siteName' => env('APP_NAME') . ".",
-            'user' => $user,
+            'user' => $this->user,
             'nav' => [
 
             ]

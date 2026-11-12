@@ -1,6 +1,6 @@
 <div class="bg-mist-50 border-b border-mist-200 w-full sticky top-0 z-50">
-    <div class="flex items-center justify-between md:max-w-4xl mx-auto px-4">
-        <a href="/">
+    <div class="flex items-center justify-between md:max-w-2xl mx-auto px-4">
+        <a wire:navigate href={{ route('feed') }}>
             <h1 class="text-2xl font-bold">{{ $siteName }}</h1>
         </a>
         <ul class="relative inline-flex items-center justify-start gap-4">
@@ -32,7 +32,7 @@
                         </div>
                         <ul class="*:h-full *:flex *:items-center *:text-sm">
                             <li>
-                                <a href=""
+                                <a wire:navigate href={{ route('user.show') }}
                                     class="flex items-center gap-1.5 justify-start py-1.5  px-3 w-full hover:bg-mist-200 m-0.5 rounded-md duration-75">
                                     <svg class="w-5" xmlns="http://www.w3.org/2000/svg"
                                         viewBox="0 0 640 640"><!--!Font Awesome Free v7.3.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2026 Fonticons, Inc.-->
@@ -42,17 +42,6 @@
                                     <span>
                                         Profil
                                     </span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href=""
-                                    class="flex items-center gap-1.5 py-1.5 px-3 w-full hover:bg-mist-200 m-0.5 rounded-md duration-75">
-                                    <svg class="w-5" xmlns="http://www.w3.org/2000/svg"
-                                        viewBox="0 0 640 640"><!--!Font Awesome Free v7.3.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2026 Fonticons, Inc.-->
-                                        <path
-                                            d="M400 416C497.2 416 576 337.2 576 240C576 142.8 497.2 64 400 64C302.8 64 224 142.8 224 240C224 258.7 226.9 276.8 232.3 293.7L71 455C66.5 459.5 64 465.6 64 472L64 552C64 565.3 74.7 576 88 576L168 576C181.3 576 192 565.3 192 552L192 512L232 512C245.3 512 256 501.3 256 488L256 448L296 448C302.4 448 308.5 445.5 313 441L346.3 407.7C363.2 413.1 381.3 416 400 416zM440 160C462.1 160 480 177.9 480 200C480 222.1 462.1 240 440 240C417.9 240 400 222.1 400 200C400 177.9 417.9 160 440 160z" />
-                                    </svg>
-                                    <span>Ganti password</span>
                                 </a>
                             </li>
                             <li class="border-t border-mist-200">

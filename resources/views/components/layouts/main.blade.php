@@ -1,7 +1,7 @@
 <div class="flex flex-col justify-between h-screen gap-2">
     <livewire:navbar/>
     <div class="flex-1">
-        <div class="flex flex-col md:max-w-4xl mx-auto">
+        <div class="flex flex-col md:max-w-2xl mx-auto">
             {{ $slot }}
         </div>
     </div>
