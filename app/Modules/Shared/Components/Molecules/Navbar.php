@@ -3,6 +3,7 @@
 namespace App\Modules\Shared\Components\Molecules;
 
 use App\Modules\User\Shared\Services\LogoutService;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
 class Navbar extends Component
@@ -23,8 +24,11 @@ class Navbar extends Component
 
     public function render()
     {
+        $user = Auth::user();
+
         return view('components.molecules.navbar', [
             'siteName' => env('APP_NAME') . ".",
+            'user' => $user,
             'nav' => [
 
             ]

@@ -91,6 +91,7 @@ class FormAuth extends Component
                 $this->addError('errors', $th->getMessage());
             }
             $this->password = '';
+            $this->confirmPassword = '';
         }
     }
 

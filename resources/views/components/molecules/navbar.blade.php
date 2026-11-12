@@ -15,8 +15,7 @@
             <li class="relative flex items-center">
                 <button class="cursor-pointer flex items-center gap-2" type="button" wire:click="toggleDropdown">
                     <div class="aspect-square relative overflow-hidden w-full max-w-8 max-h-8 rounded-full">
-                        <img src="https://dummyimage.com/600x600/000/fff.jpg" alt=""
-                            class="object-cover w-full object-center h-full">
+                        <img src={{ asset($user->avatar) }} alt="" class="object-cover w-full object-center h-full">
                     </div>
                     <svg class="w-5 {{ $showDropdown ? 'rotate-180' : '' }}" xmlns="http://www.w3.org/2000/svg"
                         viewBox="0 0 640 640"><!--!Font Awesome Free v7.3.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2026 Fonticons, Inc.-->
@@ -28,8 +27,8 @@
                     <div
                         class="bg-mist-50 border border-mist-200 min-w-52 max-w-52 absolute top-full right-0 overflow-hidden rounded-md">
                         <div class="px-3 pt-2 pb-4 border-b border-mist-200 -space-y-1">
-                            <h4 class="font-semibold truncate">Ahmad Zidan</h4>
-                            <span class="text-mist-400 font-semibold text-sm truncate">@username</span>
+                            <h4 class="font-semibold truncate">{{ $user->name }}</h4>
+                            <span class="text-mist-400 font-semibold text-sm truncate">{{ '@' . $user->username }}</span>
                         </div>
                         <ul class="*:h-full *:flex *:items-center *:text-sm">
                             <li>
