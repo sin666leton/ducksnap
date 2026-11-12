@@ -9,6 +9,8 @@ class FeedPage extends Component
     public function render()
     {
         return view('pages.feed')
-            ->layout('layouts.app');
+            ->layout('layouts.app', [
+                'title' => 'Beranda'
+            ]);
     }
 }
