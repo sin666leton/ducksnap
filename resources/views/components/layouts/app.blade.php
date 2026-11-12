@@ -4,14 +4,16 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        <title>{{ $title ?? config('app.name') }}</title>
-
+        <title>{{ config('app.name') }} - {{ $title ?? '' }}</title>
+        
         @vite(['resources/css/app.css', 'resources/js/app.js'])
 
         @livewireStyles
     </head>
-    <body class="bg-slate-50">
-        {{ $slot }}
+    <body class="bg-mist-100 text-slate-600">
+        <!-- <div class="flex flex-col justify-between h-screen"> -->
+            {{ $slot }}
+        <!-- </div> -->
         @livewireScripts
     </body>
 </html>
