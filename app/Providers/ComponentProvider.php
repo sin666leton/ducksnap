@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Modules\Feed\Shared\Components\Molecules\CommentCard;
 use App\Modules\Feed\Shared\Components\Molecules\PostCard;
+use App\Modules\Feed\Shared\Components\Organism\CreatePost;
 use App\Modules\Shared\Components\Layout\MainLayout;
 use App\Modules\Shared\Components\Molecules\Navbar;
 use App\Modules\User\Shared\Components\FormAuth;
@@ -34,9 +35,10 @@ class ComponentProvider extends ServiceProvider
         // Molecules
         Livewire::component('navbar', Navbar::class);
         Livewire::component('post-card', PostCard::class);
-        Blade::component(CommentCard::class, 'comment-card');
+        LiveWire::component('comment-card', CommentCard::class);
 
         // Organism
         Livewire::component('form-auth', FormAuth::class);
+        Livewire::component('create-post', CreatePost::class);
     }
 }

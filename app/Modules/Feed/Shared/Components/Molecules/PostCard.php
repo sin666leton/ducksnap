@@ -9,25 +9,22 @@ use Livewire\Component;
 
 class PostCard extends Component
 {
+    public $authorId;
+
+    public string $authorAvatar;
+
+    public string $authorName;
+
+    public $postId;
+
+    public string $postContent;
+
+    public string|null $postImage;
+
+    public string $postCreated;
+
     public function render()
     {
-        $user = User::factory()
-            ->makeOne();
-        $post = Post::factory()
-            ->for($user)
-            ->makeOne();
-
-        $dto = new PostWithCommentsDTO(
-            $user->id ?? 1,
-            $user->avatar,
-            $user->name,
-            $post->id ?? 1,
-            $post->content,
-            $post->created_at ?? now()
-        );
-
-        return view('components.molecules.post-card', [
-            'post' => $dto
-        ]);
+        return view('components.molecules.post-card');
     }
 }
