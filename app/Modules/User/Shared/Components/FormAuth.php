@@ -31,7 +31,7 @@ class FormAuth extends Component
         switch ($this->mode) {
             case 'register':
                 return $this->register();
-            
+
             default:
                 return $this->login();
         }
@@ -61,6 +61,7 @@ class FormAuth extends Component
         if ($this->mode == 'register') {
             $rules['name'] = 'required|string|min:3';
             $rules['password'] = 'required|string|min:8';
+            $rules['username'] = 'required|string|min:3';
         }
 
         return $this->validate($rules);
